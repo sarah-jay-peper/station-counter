@@ -4,11 +4,11 @@
     #map {
         position: relative;
     }
+
     .dot {
         position: absolute;
         left: 50px;
         top: 50px;
-        /*transition: left .5s ease-in, top .5s ease-in;*/
         width: 7px;
         height: 7px;
         visibility: hidden;
@@ -34,25 +34,34 @@
     var mapImg = document.querySelector("#mapImg");
     var output = document.querySelector("#output");
     var count = 0;
+    var details = {dots: []};
 
     container.addEventListener("click", getClickPosition, false);
 
     function getClickPosition(e) {
-        count++;
-//        if (e.target.id.contains("dot")) {
-//            container.removeChild(e.target);
-//        }
-        var newDot = dot.cloneNode(true);
-        newDot.style.visibility = "visible";
-        newDot.id = "dot"+count;
-        container.insertBefore(newDot, mapImg);
-        var parentPosition = getPosition(e.currentTarget);
-        var xPosition = e.clientX - parentPosition.x - (dot.clientWidth / 2);
-        var yPosition = e.clientY - parentPosition.y - (dot.clientHeight / 2);
+        if (e.target.id.includes("dot")) {
+            container.removeChild(e.target);
+        } else {
+            count++;
+            var newDot = dot.cloneNode(true);
+            newDot.style.visibility = "visible";
+            newDot.id = "dot" + count;
+            container.insertBefore(newDot, mapImg);
+            var parentPosition = getPosition(e.currentTarget);
+            var xPosition = e.clientX - parentPosition.x - (dot.clientWidth / 2);
+            var yPosition = e.clientY - parentPosition.y - (dot.clientHeight / 2);
+            newDot.style.left = xPosition + "px";
+            newDot.style.top = yPosition + "px";
+            details.dots.push({
+                name: newDot.id,
+                position: {
+                    x: xPosition,
+                    y: yPosition
+                }
+            });
+        }
 
-        output.textContent = xPosition + " " + yPosition + " " + e.target.id;
-        newDot.style.left = xPosition + "px";
-        newDot.style.top = yPosition + "px";
+        output.innerHTML = JSON.stringify(details, null, 2);//.replace("\n", "<br/>");
     }
 
     // Helper function to get an element's exact position
