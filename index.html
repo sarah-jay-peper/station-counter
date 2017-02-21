@@ -1,19 +1,23 @@
 <html>
 <body>
 <style>
-    #thing {
+    #map {
         position: relative;
+    }
+    .dot {
+        position: absolute;
         left: 50px;
         top: 50px;
-        transition: left .5s ease-in, top .5s ease-in;
+        /*transition: left .5s ease-in, top .5s ease-in;*/
         width: 7px;
         height: 7px;
+        visibility: hidden;
     }
 </style>
 <h2>Hello World</h2>
 <div id="map" style="width: 1000px;">
-    <img id="thing" src="reddot.png">
-    <img src="map.png" style="width: 1000px;"/>
+    <img id="dot" class="dot" src="reddot.png">
+    <img id="mapImg" src="map.png" style="width: 1000px;"/>
 </div>
 
 <div id="output" style="width: 1000px; height: 200px">
@@ -25,20 +29,30 @@
 </textarea>
 
 <script>
-    var theThing = document.querySelector("#thing");
+    var dot = document.querySelector("#dot");
     var container = document.querySelector("#map");
+    var mapImg = document.querySelector("#mapImg");
     var output = document.querySelector("#output");
+    var count = 0;
 
     container.addEventListener("click", getClickPosition, false);
 
     function getClickPosition(e) {
+        count++;
+//        if (e.target.id.contains("dot")) {
+//            container.removeChild(e.target);
+//        }
+        var newDot = dot.cloneNode(true);
+        newDot.style.visibility = "visible";
+        newDot.id = "dot"+count;
+        container.insertBefore(newDot, mapImg);
         var parentPosition = getPosition(e.currentTarget);
-        var xPosition = e.clientX - parentPosition.x - (theThing.clientWidth / 2);
-        var yPosition = e.clientY - parentPosition.y - (theThing.clientHeight / 2);
+        var xPosition = e.clientX - parentPosition.x - (dot.clientWidth / 2);
+        var yPosition = e.clientY - parentPosition.y - (dot.clientHeight / 2);
 
-        output.textContent = xPosition + " " + yPosition;
-        theThing.style.left = xPosition + "px";
-        theThing.style.top = yPosition + "px";
+        output.textContent = xPosition + " " + yPosition + " " + e.target.id;
+        newDot.style.left = xPosition + "px";
+        newDot.style.top = yPosition + "px";
     }
 
     // Helper function to get an element's exact position
