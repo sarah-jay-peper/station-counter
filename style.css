@@ -1,0 +1,13 @@
+
+#map {
+    position: relative;
+}
+
+.dot {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 7px;
+    height: 7px;
+    visibility: hidden;
+}

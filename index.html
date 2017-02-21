@@ -1,19 +1,8 @@
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <body>
-<style>
-    #map {
-        position: relative;
-    }
-
-    .dot {
-        position: absolute;
-        left: 50px;
-        top: 50px;
-        width: 7px;
-        height: 7px;
-        visibility: hidden;
-    }
-</style>
 <h2>Hello World</h2>
 <div id="map" style="width: 1000px;">
     <img id="dot" class="dot" src="reddot.png">
@@ -28,69 +17,7 @@
  input
 </textarea>
 
-<script>
-    var dot = document.querySelector("#dot");
-    var container = document.querySelector("#map");
-    var mapImg = document.querySelector("#mapImg");
-    var output = document.querySelector("#output");
-    var count = 0;
-    var details = {dots: []};
-
-    container.addEventListener("click", getClickPosition, false);
-
-    function getClickPosition(e) {
-        if (e.target.id.includes("dot")) {
-            container.removeChild(e.target);
-        } else {
-            count++;
-            var newDot = dot.cloneNode(true);
-            newDot.style.visibility = "visible";
-            newDot.id = "dot" + count;
-            container.insertBefore(newDot, mapImg);
-            var parentPosition = getPosition(e.currentTarget);
-            var xPosition = e.clientX - parentPosition.x - (dot.clientWidth / 2);
-            var yPosition = e.clientY - parentPosition.y - (dot.clientHeight / 2);
-            newDot.style.left = xPosition + "px";
-            newDot.style.top = yPosition + "px";
-            details.dots.push({
-                name: newDot.id,
-                position: {
-                    x: xPosition,
-                    y: yPosition
-                }
-            });
-        }
-
-        output.innerHTML = JSON.stringify(details, null, 2);//.replace("\n", "<br/>");
-    }
-
-    // Helper function to get an element's exact position
-    function getPosition(el) {
-        var xPos = 0;
-        var yPos = 0;
-
-        while (el) {
-            if (el.tagName == "BODY") {
-                // deal with browser quirks with body/window/document and page scroll
-                var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-                var yScroll = el.scrollTop || document.documentElement.scrollTop;
-
-                xPos += (el.offsetLeft - xScroll + el.clientLeft);
-                yPos += (el.offsetTop - yScroll + el.clientTop);
-            } else {
-                // for all other non-BODY elements
-                xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-                yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-            }
-
-            el = el.offsetParent;
-        }
-        return {
-            x: xPos,
-            y: yPos
-        };
-    }
-</script>
+<script src="onClick.js"></script>
 
 </body>
 </html>
