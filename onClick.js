@@ -2,6 +2,7 @@ var dotImg = document.querySelector("#dot");
 var container = document.querySelector("#map");
 var mapImg = document.querySelector("#mapImg");
 var output = document.querySelector("#output");
+var counterField = document.querySelector("#counterField");
 var details = {dots: [], count: 0};
 var storedDetails = JSON.parse(localStorage.getItem("dots"));
 
@@ -12,6 +13,7 @@ if (storedDetails !== null
     for(var i = details.dots.length - 1; i >= 0; i--) {
         printDot(details.dots[i]);
     }
+    counterField.innerHTML = details.dots.length;
 }
 
 container.addEventListener("click", getClickPosition, false);
@@ -26,6 +28,7 @@ function getClickPosition(e) {
 
     store(details);
     output.innerHTML = JSON.stringify(details, null, 2);
+    counterField.innerHTML = details.dots.length;
 }
 
 function addDot(e) {

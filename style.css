@@ -17,6 +17,22 @@
     height: 200px
 }
 
+#input {
+    visibility: hidden;
+}
+
 #mapImg {
     width: 1400px;
+}
+
+#counter {
+    float: right;
+    position: absolute;
+    top: 50px;
+    left: 1600px;
+    border: 1px solid black;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    padding-top: 25px;
 }
