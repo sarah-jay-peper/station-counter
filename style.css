@@ -7,8 +7,8 @@
     position: absolute;
     left: 50px;
     top: 50px;
-    width: 7px;
-    height: 7px;
+    width: 12px;
+    height: 12px;
     visibility: hidden;
 }
 
@@ -22,17 +22,18 @@
 }
 
 #mapImg {
-    width: 1400px;
+    width: 2500px;
 }
 
 #counter {
+    background-color: beige;
     float: right;
-    position: absolute;
-    top: 50px;
-    left: 1600px;
+    position: fixed;
+    top: 5px;
+    left: 1200px;
     border: 1px solid black;
     width: 100px;
-    height: 50px;
+    height: 30px;
     text-align: center;
-    padding-top: 25px;
+    padding-top: 2px;
 }
