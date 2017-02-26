@@ -1,4 +1,4 @@
-var dot = document.querySelector("#dot");
+var dotImg = document.querySelector("#dot");
 var container = document.querySelector("#map");
 var mapImg = document.querySelector("#mapImg");
 var output = document.querySelector("#output");
@@ -11,6 +11,9 @@ if (storedDetails !== null
         && storedDetails.dots.length > 0) {
     details = storedDetails;
     count = storedDetails.count;
+    for(var i = details.dots.length - 1; i >= 0; i--) {
+        printDot(details.dots[i]);
+    }
 }
 
 container.addEventListener("click", getClickPosition, false);
@@ -23,29 +26,25 @@ function getClickPosition(e) {
         addDot(e);
     }
 
-    localStorage.setItem("dots", JSON.stringify(details));
+    store(details);
     output.innerHTML = count + "" + JSON.stringify(details, null, 2);
 }
 
 function addDot(e) {
     count++;
     details.count = count;
-    var newDot = dot.cloneNode(true);
-    newDot.style.visibility = "visible";
-    newDot.id = "dot" + count;
-    container.insertBefore(newDot, mapImg);
     var parentPosition = getPosition(e.currentTarget);
-    var xPosition = e.clientX - parentPosition.x - (dot.clientWidth / 2);
-    var yPosition = e.clientY - parentPosition.y - (dot.clientHeight / 2);
-    newDot.style.left = xPosition + "px";
-    newDot.style.top = yPosition + "px";
-    details.dots.push({
-        name: newDot.id,
+    var xPosition = e.clientX - parentPosition.x - (dotImg.clientWidth / 2);
+    var yPosition = e.clientY - parentPosition.y - (dotImg.clientHeight / 2);
+    var dot = {
+        name: "dot" + count,
         position: {
-            x: xPosition,
-            y: yPosition
+          x: xPosition,
+          y: yPosition
         }
-    });
+    };
+    printDot(dot);
+    details.dots.push(dot);
 }
 
 function removeDot(e) {
@@ -55,6 +54,19 @@ function removeDot(e) {
            details.dots.splice(i, 1);
         }
     }
+}
+
+function printDot(dot) {
+    var newDot = dotImg.cloneNode(true);
+    newDot.style.visibility = "visible";
+    newDot.id = dot.name;
+    container.insertBefore(newDot, mapImg);
+    newDot.style.left = dot.position.x + "px";
+    newDot.style.top = dot.position.y + "px";
+}
+
+function store(o) {
+    localStorage.setItem("dots", JSON.stringify(o));
 }
 
 // Helper function to get an element's exact position
@@ -83,3 +95,4 @@ function getPosition(el) {
         y: yPos
     };
 }
+
