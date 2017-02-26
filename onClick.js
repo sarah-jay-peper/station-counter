@@ -2,7 +2,6 @@ var dotImg = document.querySelector("#dot");
 var container = document.querySelector("#map");
 var mapImg = document.querySelector("#mapImg");
 var output = document.querySelector("#output");
-var count = 0;
 var details = {dots: [], count: 0};
 var storedDetails = JSON.parse(localStorage.getItem("dots"));
 
@@ -10,7 +9,6 @@ if (storedDetails !== null
         && storedDetails.dots !== null
         && storedDetails.dots.length > 0) {
     details = storedDetails;
-    count = storedDetails.count;
     for(var i = details.dots.length - 1; i >= 0; i--) {
         printDot(details.dots[i]);
     }
@@ -27,20 +25,17 @@ function getClickPosition(e) {
     }
 
     store(details);
-    output.innerHTML = count + "" + JSON.stringify(details, null, 2);
+    output.innerHTML = JSON.stringify(details, null, 2);
 }
 
 function addDot(e) {
-    count++;
-    details.count = count;
+    details.count++;
     var parentPosition = getPosition(e.currentTarget);
-    var xPosition = e.clientX - parentPosition.x - (dotImg.clientWidth / 2);
-    var yPosition = e.clientY - parentPosition.y - (dotImg.clientHeight / 2);
     var dot = {
-        name: "dot" + count,
+        name: "dot" + details.count,
         position: {
-          x: xPosition,
-          y: yPosition
+          x: e.clientX - parentPosition.x - (dotImg.clientWidth / 2),
+          y: e.clientY - parentPosition.y - (dotImg.clientHeight / 2)
         }
     };
     printDot(dot);
@@ -53,6 +48,9 @@ function removeDot(e) {
         if(details.dots[i].name === e.target.id) {
            details.dots.splice(i, 1);
         }
+    }
+    if (details.dots.length < 1) {
+        details.count = 0;
     }
 }
 
