@@ -39,6 +39,11 @@ function addDot(e) {
 
 function removeDot(e) {
     container.removeChild(e.target);
+    for(var i = details.dots.length - 1; i >= 0; i--) {
+        if(details.dots[i].name === e.target.id) {
+           details.dots.splice(i, 1);
+        }
+    }
 }
 
 // Helper function to get an element's exact position
