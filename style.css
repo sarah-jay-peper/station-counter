@@ -11,3 +11,12 @@
     height: 7px;
     visibility: hidden;
 }
+
+#output, #input {
+    width: 1000px;
+    height: 200px
+}
+
+#mapImg {
+    width: 1000px;
+}
