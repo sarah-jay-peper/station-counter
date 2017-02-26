@@ -3,9 +3,18 @@ var container = document.querySelector("#map");
 var mapImg = document.querySelector("#mapImg");
 var output = document.querySelector("#output");
 var count = 0;
-var details = {dots: []};
+var details = {dots: [], count: 0};
+var storedDetails = JSON.parse(localStorage.getItem("dots"));
+
+if (storedDetails !== null
+        && storedDetails.dots !== null
+        && storedDetails.dots.length > 0) {
+    details = storedDetails;
+    count = storedDetails.count;
+}
 
 container.addEventListener("click", getClickPosition, false);
+output.innerHTML = JSON.stringify(details, null, 2);
 
 function getClickPosition(e) {
     if (e.target.id.includes("dot")) {
@@ -14,11 +23,13 @@ function getClickPosition(e) {
         addDot(e);
     }
 
-    output.innerHTML = JSON.stringify(details, null, 2);//.replace("\n", "<br/>");
+    localStorage.setItem("dots", JSON.stringify(details));
+    output.innerHTML = count + "" + JSON.stringify(details, null, 2);
 }
 
 function addDot(e) {
     count++;
+    details.count = count;
     var newDot = dot.cloneNode(true);
     newDot.style.visibility = "visible";
     newDot.id = "dot" + count;
