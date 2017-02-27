@@ -6,18 +6,22 @@ var counterField = document.querySelector("#counterField");
 var details = {dots: [], count: 0};
 var storedDetails = JSON.parse(localStorage.getItem("dots"));
 
-if (storedDetails !== null
+init();
+
+function init() {
+    if (storedDetails !== null
         && storedDetails.dots !== null
         && storedDetails.dots.length > 0) {
-    details = storedDetails;
-    for(var i = details.dots.length - 1; i >= 0; i--) {
-        printDot(details.dots[i]);
+        details = storedDetails;
+        for (var i = details.dots.length - 1; i >= 0; i--) {
+            printDot(details.dots[i]);
+        }
+        counterField.innerHTML = details.dots.length;
     }
-    counterField.innerHTML = details.dots.length;
-}
 
-container.addEventListener("click", getClickPosition, false);
-output.innerHTML = JSON.stringify(details, null, 2);
+    container.addEventListener("click", getClickPosition, false);
+    output.innerHTML = JSON.stringify(details, null, 2);
+}
 
 function getClickPosition(e) {
     if (e.target.id.includes("dot")) {
@@ -37,8 +41,8 @@ function addDot(e) {
     var dot = {
         name: "dot" + details.count,
         position: {
-          x: e.clientX - parentPosition.x - (dotImg.clientWidth / 2),
-          y: e.clientY - parentPosition.y - (dotImg.clientHeight / 2)
+            x: e.clientX - parentPosition.x - (dotImg.clientWidth / 2),
+            y: e.clientY - parentPosition.y - (dotImg.clientHeight / 2)
         }
     };
     printDot(dot);
@@ -47,9 +51,9 @@ function addDot(e) {
 
 function removeDot(e) {
     container.removeChild(e.target);
-    for(var i = details.dots.length - 1; i >= 0; i--) {
-        if(details.dots[i].name === e.target.id) {
-           details.dots.splice(i, 1);
+    for (var i = details.dots.length - 1; i >= 0; i--) {
+        if (details.dots[i].name === e.target.id) {
+            details.dots.splice(i, 1);
         }
     }
     if (details.dots.length < 1) {
