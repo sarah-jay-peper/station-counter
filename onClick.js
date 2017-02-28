@@ -4,11 +4,11 @@ var mapImg = document.querySelector("#mapImg");
 var output = document.querySelector("#output");
 var counterField = document.querySelector("#counterField");
 var details = {dots: [], count: 0};
-var storedDetails = JSON.parse(localStorage.getItem("dots"));
+var globStoreName = "";
 
-init();
-
-function init() {
+function init(storeName) {
+    globStoreName = storeName;
+    var storedDetails = JSON.parse(localStorage.getItem(storeName));
     if (storedDetails !== null
         && storedDetails.dots !== null
         && storedDetails.dots.length > 0) {
@@ -30,7 +30,7 @@ function getClickPosition(e) {
         addDot(e);
     }
 
-    store(details);
+    store(globStoreName, details);
     output.innerHTML = JSON.stringify(details, null, 2);
     counterField.innerHTML = details.dots.length;
 }
@@ -70,8 +70,8 @@ function printDot(dot) {
     newDot.style.top = dot.position.y + "px";
 }
 
-function store(o) {
-    localStorage.setItem("dots", JSON.stringify(o));
+function store(storeName, o) {
+    localStorage.setItem(storeName, JSON.stringify(o));
 }
 
 // Helper function to get an element's exact position
