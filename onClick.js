@@ -35,6 +35,15 @@ function getClickPosition(e) {
     counterField.innerHTML = details.dots.length;
 }
 
+function dragPosition(e) {
+    e.target.id;
+    var parentPosition = getPosition(e.currentTarget.parentNode);
+//    e.srcElement.style.left = e.srcElement.offsetLeft + e.offsetX + "px";
+//    e.srcElement.style.top = e.srcElement.offsetTop + e.offsetY + "px";
+    e.srcElement.style.left = e.clientX - parentPosition.x - (dotImg.clientWidth / 2) + "px";
+    e.srcElement.style.top = e.clientY - parentPosition.y - (dotImg.clientHeight / 2) + "px";
+}
+
 function addDot(e) {
     details.count++;
     var parentPosition = getPosition(e.currentTarget);
@@ -68,6 +77,7 @@ function printDot(dot) {
     container.insertBefore(newDot, mapImg);
     newDot.style.left = dot.position.x + "px";
     newDot.style.top = dot.position.y + "px";
+    newDot.addEventListener("dragend", dragPosition, false);
 }
 
 function store(storeName, o) {
