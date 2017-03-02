@@ -1,7 +1,7 @@
 
 #map {
     position: relative;
-    cursor: url(reddot_12.png) 6 6, crosshair;
+    cursor: url(img/reddot_12.png) 6 6, crosshair;
 }
 
 .dot {
