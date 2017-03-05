@@ -1,10 +1,10 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Station counter :: mark points</title>
+    <title>Station counter :: show Stations</title>
 </head>
 <body>
-<div id="map" class="mapSelect">
+<div id="map" class="mapShow">
     <img id="dot" class="dot" src="img/reddot_100.png">
     <img id="mapImg" src="img/map.png"/>
     <p>Map CC-BY-SA by <a href="https://commons.wikimedia.org/wiki/User:Sameboat">User:Sameboat</a> on wikipedia (<a href="https://commons.wikimedia.org/wiki/File:London_Underground_Overground_DLR_Crossrail_map.svg">src</a>) </p>
@@ -21,9 +21,10 @@
  input
 </textarea>
 
+<script src="stations.js"></script>
 <script src="onClick.js"></script>
+<script src="showStations.js"></script>
 <script>
-    init("markPoints");
 </script>
 
 </body>

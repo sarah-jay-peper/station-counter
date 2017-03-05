@@ -1,7 +1,12 @@
 
-#map {
+.mapSelect {
     position: relative;
     cursor: url(img/reddot_12.png) 6 6, crosshair;
+}
+
+.mapShow {
+    position: relative;
+    cursor: default;
 }
 
 .dot {
