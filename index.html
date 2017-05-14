@@ -4,7 +4,9 @@
     <title>Station counter</title>
 </head>
 <body>
+<h1>Tube Map Challenge 2017</h1>
 <h2>Station counter</h2>
+<a href="https://www.youtube.com/watch?v=qJc9IDT-kqQ">Explanation&Rules</a><br/>
 <button id="btn-challenge-1" onclick="onClickChallenge1()" disabled>Challenge 1</button>
 <button id="btn-challenge-2" onclick="onClickChallenge2()">Challenge 2</button>
 <div id="map" class="mapSelect">
@@ -13,18 +15,11 @@
     <p>Map CC-BY-SA by <a href="https://commons.wikimedia.org/wiki/User:Sameboat">User:Sameboat</a> on wikipedia (<a href="https://commons.wikimedia.org/wiki/File:London_Underground_Overground_DLR_Crossrail_map.svg">src</a>) </p>
     <p>Source on <a href="https://github.com/jasontrublu/station-counter">GitHub</a> </p>
 </div>
-
 <div id="counter">Count: <span id="counterField">0</span></div>
-
-<textarea id="input">
- input
-</textarea>
-
 <script src="onClick.js"></script>
 <script>
     localStorage.setItem("dots_challenge1", localStorage.getItem("dots"));
     init("dots_challenge1");
 </script>
-
 </body>
 </html>
