@@ -3,6 +3,8 @@ var container = document.querySelector("#map");
 var mapImg = document.querySelector("#mapImg");
 var output = document.querySelector("#output");
 var counterField = document.querySelector("#counterField");
+var btn1 = document.querySelector("#btn-challenge-1");
+var btn2 = document.querySelector("#btn-challenge-2");
 var details = {dots: [], count: 0};
 var globStoreName = "";
 
@@ -21,6 +23,16 @@ function init(storeName) {
 
     container.addEventListener("click", getClickPosition, false);
     output.innerHTML = JSON.stringify(details, null, 2);
+}
+
+function onClickChallenge1() {
+    btn1.disabled = true;
+    btn2.disabled = false;
+}
+
+function onClickChallenge2() {
+    btn1.disabled = false;
+    btn2.disabled = true;
 }
 
 function getClickPosition(e) {
@@ -110,4 +122,3 @@ function getPosition(el) {
         y: yPos
     };
 }
-
