@@ -9,6 +9,11 @@ var details = {dots: [], count: 0};
 var globStoreName = "";
 
 function init(storeName) {
+    for (var j = details.dots.length - 1; j >= 0; j--) {
+        var dot = document.querySelector("#" + details.dots[j].name);
+        container.removeChild(dot);
+    }
+    details = {dots: [], count: 0};
     globStoreName = storeName;
     var storedDetails = JSON.parse(localStorage.getItem(storeName));
     if (storedDetails !== null
@@ -28,17 +33,12 @@ function init(storeName) {
 function onClickChallenge1() {
     btn1.disabled = true;
     btn2.disabled = false;
+    init("dots_challenge1");
 }
 
 function onClickChallenge2() {
     btn1.disabled = false;
     btn2.disabled = true;
-
-    for (var i = details.dots.length - 1; i >= 0; i--) {
-        var dot = document.querySelector("#" + details.dots[i].name);
-        container.removeChild(dot);
-    }
-    details = {dots: [], count: 0};
     init("dots_challenge2")
 }
 
