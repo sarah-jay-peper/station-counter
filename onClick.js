@@ -33,6 +33,13 @@ function onClickChallenge1() {
 function onClickChallenge2() {
     btn1.disabled = false;
     btn2.disabled = true;
+
+    for (var i = details.dots.length - 1; i >= 0; i--) {
+        var dot = document.querySelector("#" + details.dots[i].name);
+        container.removeChild(dot);
+    }
+    details = {dots: [], count: 0};
+    init("dots_challenge2")
 }
 
 function getClickPosition(e) {
@@ -50,8 +57,6 @@ function getClickPosition(e) {
 function dragPosition(e) {
     e.target.id;
     var parentPosition = getPosition(e.currentTarget.parentNode);
-//    e.srcElement.style.left = e.srcElement.offsetLeft + e.offsetX + "px";
-//    e.srcElement.style.top = e.srcElement.offsetTop + e.offsetY + "px";
     e.srcElement.style.left = e.clientX - parentPosition.x - (dotImg.clientWidth / 2) + "px";
     e.srcElement.style.top = e.clientY - parentPosition.y - (dotImg.clientHeight / 2) + "px";
 }
