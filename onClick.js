@@ -1,7 +1,6 @@
 var dotImg = document.querySelector("#dot");
 var container = document.querySelector("#map");
 var mapImg = document.querySelector("#mapImg");
-var output = document.querySelector("#output");
 var counterField = document.querySelector("#counterField");
 var btn1 = document.querySelector("#btn-challenge-1");
 var btn2 = document.querySelector("#btn-challenge-2");
@@ -9,11 +8,7 @@ var details = {dots: [], count: 0};
 var globStoreName = "";
 
 function init(storeName) {
-    for (var j = details.dots.length - 1; j >= 0; j--) {
-        var dot = document.querySelector("#" + details.dots[j].name);
-        container.removeChild(dot);
-    }
-    details = {dots: [], count: 0};
+    clearDots();
     globStoreName = storeName;
     var storedDetails = JSON.parse(localStorage.getItem(storeName));
     if (storedDetails !== null
@@ -27,7 +22,6 @@ function init(storeName) {
     }
 
     container.addEventListener("click", getClickPosition, false);
-    output.innerHTML = JSON.stringify(details, null, 2);
 }
 
 function onClickChallenge1() {
@@ -50,7 +44,6 @@ function getClickPosition(e) {
     }
 
     store(globStoreName, details);
-    output.innerHTML = JSON.stringify(details, null, 2);
     counterField.innerHTML = details.dots.length;
 }
 
@@ -126,4 +119,13 @@ function getPosition(el) {
         x: xPos,
         y: yPos
     };
+}
+
+function clearDots() {
+    for (var j = details.dots.length - 1; j >= 0; j--) {
+        var dot = document.querySelector("#" + details.dots[j].name);
+        container.removeChild(dot);
+    }
+    counterField.innerHTML = 0;
+    details = {dots: [], count: 0};
 }
