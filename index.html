@@ -18,7 +18,10 @@
 <div id="counter">Count: <span id="counterField">0</span></div>
 <script src="onClick.js"></script>
 <script>
-    localStorage.setItem("dots_challenge1", localStorage.getItem("dots"));
+    if (localStorage.dots) {
+        localStorage.setItem("dots_challenge1", localStorage.getItem("dots"));
+        localStorage.removeItem("dots");
+    }
     init("dots_challenge1");
 </script>
 </body>
